@@ -55,6 +55,30 @@ class LRUCache {
         }
         return false; // miss
         }
+
+        //inserts a new address into the cache, evicting LRU item if full
+        public void put(int address) {
+            // if it already exists, just refresh its position and exit
+            if (map.containsKey(address)) {
+                Node node = map.get(address);
+                remove(node);
+                insertAtFront(node);
+                return;
+            }
+
+            // if cache is full, evit the Least Recently Used item (right before tail)
+            if (map.size() == capacity) {
+                Node lruNode = tail.prev;
+                remove(lruNode);
+                map.remove(lruNode.address);
+            }
+
+            // insert the new address at the front
+            Node newNode = new Node(address);
+            insertAtFront(newNode);
+            map.put(address, newNode);
+
+        }
     }
 
 
