@@ -13,5 +13,24 @@ public class Main {
         System.out.println("Access 3 (expect HIT): " + cache.get(3));
         System.out.println("Access 4 (expect HIT): " + cache.get(4));
 
+        System.out.println("\n--- Testing Cache.java (Direct-Mapped) ---");
+        Cache directMapped = new Cache(4, 1); // 4 sets, 1 way = Direct-Mapped
+
+        System.out.println("Access 10 (expect MISS): " + directMapped.access(10));
+        System.out.println("Access 10 again (expect HIT): " + directMapped.access(10));
+
+        System.out.println("\n--- Testing Cache.java (Set-Associativ) ---");
+        Cache setAssociative = new Cache(2, 2); // 2 sets, 2 ways each - Set-Associative
+
+        System.out.println("Access 5 (expect MISS): " + setAssociative.access(5));
+        System.out.println("Access 7 (expect MISS): " + setAssociative.access(7));
+        System.out.println("Access 5 (expect HIT): " + setAssociative.access(5));
+
+
+
+
     }
+
+    
+
 }
