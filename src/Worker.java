@@ -5,7 +5,7 @@ import java.util.Random;
     private int numberOfAccesses;
     private int addressRange;
 
-    public Worker(Cache cache, int numberOfAccesses, int addressRaange) {
+    public Worker(Cache cache, int numberOfAccesses, int addressRange) {
         this.cache = cache;
         this.numberOfAccesses = numberOfAccesses;
         this.addressRange = addressRange;

@@ -36,6 +36,43 @@ public class Main {
         profiler2.printReport();
 
 
+        System.out.println("\n--- Multi-Threaded Simulation ---");
+
+        Profiler multiThreadProfiler = new Profiler();
+        Cache sharedCache = new Cache(16, 4, multiThreadProfiler); // 16 sets, 4 ways = Set-Associative
+
+        int numberOfThreads = 4;
+        int accessesPerThread = 1000;
+        int addressRange = 500;
+
+        Thread[] threads = new Thread[numberOfThreads];
+
+        multiThreadProfiler.start();
+
+        // create and start all threads
+        for (int i = 0; i < numberOfThreads; i++) {
+            Worker worker = new Worker(sharedCache, accessesPerThread, addressRange);
+            threads[i] = new Thread(worker);
+            threads[i].start();
+        }
+
+        //wait for all threads to finish before printing report
+        try{
+        for (int i = 0; i< numberOfThreads; i++) {
+            threads[i].join();
+        } 
+    } catch (InterruptedException e) {
+        e.printStackTrace();
+    }
+
+        multiThreadProfiler.stop();
+        multiThreadProfiler.printReport();
+
+
+
+        
+
+
 
     }
 
