@@ -42,7 +42,7 @@ class LRUCache {
     }
 
     // returns true if address is a HIT, false if it's a MISS
-    public boolean get(int address) {
+    public synchronized boolean get(int address) {
         if (map.containsKey(address)) {
             // HIT - address alreaady in cache
             Node node = map.get(address);
@@ -57,7 +57,7 @@ class LRUCache {
         }
 
         //inserts a new address into the cache, evicting LRU item if full
-        public void put(int address) {
+        public synchronized void put(int address) {
             // if it already exists, just refresh its position and exit
             if (map.containsKey(address)) {
                 Node node = map.get(address);
