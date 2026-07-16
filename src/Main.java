@@ -13,7 +13,7 @@ public class Main {
         System.out.println("Access 3 (expect HIT): " + cache.get(3));
         System.out.println("Access 4 (expect HIT): " + cache.get(4));
 
-        System.out.println("\n--- Testing Cache.java (Diect-Mapped) ---");
+        System.out.println("\n--- Testing Cache.java (Direct-Mapped) ---");
         Profiler profiler1 = new Profiler();
         profiler1.start();
         Cache directMapped = new Cache(4, 1, profiler1); // 4 sets, 1 way = Direct-Mapped
@@ -24,7 +24,7 @@ public class Main {
         profiler1.printReport();
 
 
-        System.out.println("\n--- Testing Cache.java (Set-Associativ) ---");
+        System.out.println("\n--- Testing Cache.java (Set-Associative) ---");
         Profiler profiler2 = new Profiler();
         profiler2.start();
         Cache setAssociative = new Cache(2, 2, profiler2); // 2 sets, 2 ways each - Set-Associative
