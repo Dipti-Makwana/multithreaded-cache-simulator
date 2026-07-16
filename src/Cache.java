@@ -21,10 +21,13 @@ class Cache {
         int setIndex = address % numberOfSets;
         LRUCache targetSet = sets[setIndex];
 
-        boolean isHit = targetSet.get(address);
+        boolean isHit;
 
-        if (!isHit) {
-            targetSet.put(address);
+        synchronized (targetSet) {
+            isHit = targetSet.get(address);
+            if (!isHit) {
+                targetSet.put(address);
+            }
         }
 
         profiler.recordAccess(isHit);
