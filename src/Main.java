@@ -39,11 +39,15 @@ public class Main {
         System.out.println("\n--- Multi-Threaded Simulation ---");
 
         Profiler multiThreadProfiler = new Profiler();
-        Cache sharedCache = new Cache(16, 4, multiThreadProfiler); // 16 sets, 4 ways = Set-Associative
+        ArgsParser argsParser = new ArgsParser(args);
 
-        int numberOfThreads = 4;
-        int accessesPerThread = 1000;
-        int addressRange = 500;
+        int numberOfThreads = argsParser.getInt("threads", 4);
+        int accessesPerThread = argsParser.getInt("accesses", 1000);
+        int addressRange = argsParser.getInt("range", 500);
+        int numberOfSets = argsParser.getInt("sets", 16);
+        int ways = argsParser.getInt("ways", 4);
+        
+        Cache sharedCache = new Cache(numberOfSets, ways, multiThreadProfiler);
 
         Thread[] threads = new Thread[numberOfThreads];
 
